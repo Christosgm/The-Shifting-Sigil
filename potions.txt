@@ -1,0 +1,5 @@
+Potion of healing    1    150gp    The imbiber of this potion regains hit points based on their level. LV 0-3: 1d6 hit points. LV 4-6: 2d8 hit points. LV 7-9: 3d10 hit points. LV 10+: 4d12 hit points.
+Potion of invisibility    1    80gp    When you drink this potion you become invisible for 10 rounds or until you attack or cast a spell.
+Potion of flying    1    200gp    You can fly a near distance for 10 rounds when you drink this potion.
+Potion of giant strength    1    200gp    Your Strength becomes 18 (+4) and you deal x2 damage on melee attacks for 10 rounds.
+Potion of polymorph    1    200gp    When you drink this potion it casts the polymorph spell (pg. 67) on you with a duration of 1 hour.

@@ -1,0 +1,8 @@
+Aminiita root    1    C    80gp    Eat. DC 12 CON or 3d6 damage.
+Bluewort paste    1    C    80gp    Injure. DC 12 CON or paralyzed 1d4 rounds.
+Drowsy dust    1    U    150gp    Touch (eyes). DC 12 CON or deep sleep for 1d4 hours.
+Ether of Idos    1    U    150gp    Inhale. DC 12 CON or vivid waking nightmares for 1d4 rounds.
+Kingslayer oil    1    U    150gp    Eat. DC 18 CON or delayed onset (1 hour) go to 0hp.
+Nuzule oil    1    R    250gp    Injure. DC 15 CON or unconcious for 3 rounds.
+Truth-speak oil    1    R    250gp    Touch. DC 18 CON or gibber truths for 1 hour.
+Vapor of Leng    1    R    250gp    Inhale. DC 15 CON or INT stat becomes 3 for 1d4 hours.

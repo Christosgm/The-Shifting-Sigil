@@ -1,0 +1,17 @@
+20 arrows    1    1gp    -
+Backpack    1    2gp    CRAWLING KIT:
+Bag of caltrops    1    5sp    -
+20 crossbow bolts    1    1gp    -
+Crowbar    1    5sp    -
+Flask/Bottle    1    3sp    -
+Flint and steel    1    5sp    CRAWLING KIT:
+Grappling hook    1    1gp    CRAWLING KIT:
+10 iron spikes    1    1gp    CRAWLING KIT:
+Lantern    1    5gp    -
+Mirror    1    10gp    -
+Oil flask    1    5sp    -
+Pole    1    5sp    -
+3 Rations    1    5sp    CRAWLING KIT:
+60ft rope    1    1gp    CRAWLING KIT:
+Torch    1    5sp    CRAWLING KIT: Has 2
+Crawling Kit    7    7gp    -

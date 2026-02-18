@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Shifting Sigil</title>
+
+  <style>
+    html, body { height: 100%; }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin: 24px;
+      background: #f7f7f8;
+      max-width: 1100px;
+    }
+
+    body{
+  margin: 0;
+  padding: 16px;
+  box-sizing: border-box;
+
+  width: 100vw;        /* use full viewport width */
+  max-width: none;     /* IMPORTANT: remove the 1100px cap */
+  overflow-x: hidden;  /* prevents tiny horizontal overflow */
+  background: #f7f7f8;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* header.toolbar { width: 100%; }
+#shop { width: 100%; flex: 1 1 auto; min-height: 0; }
+.grid { width: 100%; } */
+
+    /* ================= TOOLBAR ================= */
+    /* .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    } */
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1 1 auto;
+      min-width: 240px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      background: linear-gradient(180deg, #fff, #f0f0f0);
+      border: 1px solid #e4e4e4;
+    }
+
+    .title {
+      font-weight: 800;
+      font-size: 2.0rem;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      /* align-items: end; */
+      flex-wrap: wrap;
+    }
+
+    .control {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .control select {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      font-size: 14px;
+    }
+
+    .btn {
+      margin-top: 18px; 
+      padding: 11px 16px;
+      border-radius: 12px;
+      border: none;
+      background: #111;
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn:hover { filter: brightness(1.05); }
+
+    /* ================= GRID / CARDS ================= */
+.grid {
+  display: grid;
+  grid-auto-flow: column;          /* 👈 force one row */
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 18px;
+
+  overflow-x: auto;                /* 👈 allow horizontal scroll */
+  padding-bottom: 8px;             /* space for scrollbar */
+}
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+    }
+
+    .card {
+  display: flex;
+  flex-direction: column;
+}
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    ul { margin: 0; padding-left: 18px; }
+    li { margin-bottom: 10px; }
+    .muted { color: #777; }
+
+    /* ================= HTML TOOLTIP ================= */
+    .tooltip {
+      position: relative;
+      cursor: help;
+      display: inline-block;
+    }
+
+    .tooltip .tip {
+      position: absolute;
+      left: 0;
+      bottom: 130%;
+      min-width: 240px;
+      max-width: 380px;
+      background: #1e1e1e;
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.4;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 80;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .tooltip .tip {
+  max-width: min(420px, calc(100vw - 32px));
+  overflow-wrap: auto;                   
+}
+
+    /* .tooltip:hover .tip {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    } */
+
+    .tooltip .tip::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      bottom: -10px;
+      border: 6px solid transparent;
+      border-top-color: #1e1e1e;
+    }
+
+    .tip-row {
+      display: flex;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .tip-label {
+      min-width: 70px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .tip-value { color: #fff; }
+
+    /* Pills inside tooltip */
+.tip .pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tip .pill {
+  display: flex;
+  flex-direction: column;      /* 👈 stack content vertically */
+  align-items: flex-start;
+  gap: 2px;
+
+  padding: 6px 10px;
+  border-radius: 8px;          /* rectangular round */
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
+
+  font-size: 12px;
+  line-height: 1.25;
+
+  max-width: 100%;
+  overflow-wrap: auto;
+  word-break: break-word;
+}
+.pill-key {
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
+/* Value / plain property */
+.pill-value {
+  opacity: 0.85;
+}
+
+    /* ================= COLOR RULES ================= */
+    .type-M  { color: #c62828; }
+    .type-R  { color: #1565c0; }
+    .type-MR { color: #7b1fa2; }
+
+    .rarity-C { color: #cd7f32; }
+    .rarity-R { color: #d4af37; text-shadow: 0 0 6px rgba(212,175,55,0.45); }
+    .rarity-U { color: #c0c0c0; }
+
+.tip-title {
+  font-weight: 900;
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.tip-title {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 4px;
+}
+  
+  /* Global tooltip portal (never clipped) */
+#tooltip-portal {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+#tooltip-portal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Use your existing .tip styles but make them work in portal */
+#tooltip-portal .tip {
+  min-width: 240px;
+  max-width: min(420px, calc(100vw - 24px));
+  background: #1e1e1e;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  overflow-wrap: anywhere;
+}
+
+#tooltip-portal .tip::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 100%;
+  border: 6px solid transparent;
+  border-top-color: #1e1e1e;
+}
+
+.control input{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-size: 14px;
+}
+
+
+/* Desktop: 3 columns */
+.toolbar{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* left grows, controls auto, right grows */
+  align-items: center;
+  gap: 18px;
+
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  margin-bottom: 24px;
+}
+
+/* Left */
+.brand-main{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  justify-self: start;
+}
+
+/* Center controls */
+.controls{
+  justify-self: center;
+  display: flex;
+  gap: 12px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+/* Right: QR truly on the right, centered in its column */
+.qr-wrap{
+  justify-self: end;          /* stick to right edge */
+  align-self: center;         /* vertical center */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* center QR + caption */
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Sizes */
+.brand-image{ height: 118px; width: auto; object-fit: contain; }
+.qr-img{ width: 92px; height: 92px; object-fit: contain; }
+
+/* Mobile: stack and center */
+@media (max-width: 640px){
+  .toolbar{
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .brand-main{
+    flex-direction: column;
+    justify-self: center;
+  }
+
+  .controls{
+    justify-self: center;
+  }
+
+  .qr-wrap{
+    justify-self: center;
+  }
+
+  .brand-image{ height: 120px; }
+  .qr-img{ width: 120px; height: 120px; }
+}
+
+@media (max-width: 640px) {
+
+  .controls {
+    justify-self: center;     /* center the whole controls block */
+    justify-content: center;  /* center items inside */
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .control {
+    align-items: center;      /* center label + input */
+    text-align: center;
+  }
+
+  .control select,
+  .control input {
+    text-align: center;
+  }
+}
+
+.seed-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.seed-clear {
+  border: none;
+  background: #eee;
+  color: #444;
+  font-weight: 800;
+  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.seed-clear:hover {
+  background: #ddd;
+}
+
+/* Mobile: make it touch-friendly */
+@media (max-width: 640px) {
+  .seed-clear {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .controls {
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
+  }
+
+  .btn {
+    margin-top: 6px;           /* small visual balance */
+  }
+}
+
+@media (max-width: 640px) {
+  #shop > .card:first-child {
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .controls {
+    align-items: center;     /* 👈 THIS fixes it */
+  }
+
+  .btn {
+    align-self: center;      /* extra safety */
+    margin-top: 20px;
+  }
+}
+
+
+.disclaimer {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.tip-separator {
+  margin: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+  </style>
+</head>
+
+
+
+<body>
+
+<header class="toolbar">
+  <div class="brand-main">
+    <div>
+      <div class="title">The Shifting Sigil</div>
+      <img src="/static/tplogo.png" alt="Logo" class="brand-image">
+    </div>
+  </div>
+
+  
+  <div class="controls">
+    <label class="control">
+      <span>Size</span>
+      <select id="size">
+        <option value="R">Random</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+      </select>
+    </label>
+
+    <label class="control">
+      <span>Prices</span>
+      <select id="cost">
+        <option value="R">Random</option>
+        <option value="C">Cheap</option>
+        <option value="N">Normal</option>
+        <option value="E">Expensive</option>
+      </select>
+    </label>
+
+    <label class="control">
+  <label class="control seed-control">
+  <span>Seed</span>
+  <div class="seed-row">
+    <input id="seed" placeholder="Random seed" />
+    <button type="button" id="clear-seed" class="seed-clear" title="Clear seed">✕</button>
+  </div>
+</label>
+</label>
+
+    <button id="gen" class="btn">Generate</button>
+  </div>
+
+  <div class="qr-wrap">
+    <img id="qr" alt="QR code" class="qr-img" />
+    <div class="qr-caption">Scan to share this shop</div>
+  </div>
+</header>
+
+<section id="shop"></section>
+
+<script>
+  const $ = id => document.getElementById(id);
+
+  function escapeHtml(s) {
+    return (s ?? "").toString()
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;");
+  }
+
+  function splitProps(props) {
+    return (props ?? "")
+      .toString()
+      .split(",")
+      .map(s => s.trim())
+      .filter(Boolean);
+  }
+
+  function renderList(items) {
+    if (!items || items.length === 0) return `<p class="muted">-</p>`;
+
+    return `<ul>` + items.map(i => {
+      let colorClass = "";
+
+      if (i.type === "M") colorClass = "type-M";
+      else if (i.type === "R") colorClass = "type-R";
+      else if (i.type === "M/R" || i.type === "R/M") colorClass = "type-MR";
+
+      if (i.rarity === "C") colorClass = "rarity-C";
+      else if (i.rarity === "R") colorClass = "rarity-R";
+      else if (i.rarity === "U") colorClass = "rarity-U";
+
+      const nameLower = (i.name ?? "").toLowerCase();
+      const propsLower = (i.properties ?? "").toLowerCase();
+      if (nameLower.includes("mithral") || propsLower.includes("mithral")) {
+        colorClass = "rarity-R";
+      }
+
+      const props = splitProps(i.properties);
+
+      const rows = [];
+      if (i.type) rows.push(`<div class="tip-row"><div class="tip-label">Type</div><div class="tip-value">${escapeHtml(i.type)}</div></div>`);
+      if (i.range) rows.push(`<div class="tip-row"><div class="tip-label">Range</div><div class="tip-value">${escapeHtml(i.range)}</div></div>`);
+      if (i.damage) rows.push(`<div class="tip-row"><div class="tip-label">Damage</div><div class="tip-value">${escapeHtml(i.damage)}</div></div>`);
+      if (i.ac) rows.push(`<div class="tip-row"><div class="tip-label">AC</div><div class="tip-value">${escapeHtml(i.ac)}</div></div>`);
+      if (i.rarity) rows.push(`<div class="tip-row"><div class="tip-label">Rarity</div><div class="tip-value">${escapeHtml(i.rarity)}</div></div>`);
+      if (i.slots !== undefined && i.slots !== null && String(i.slots).trim() !== "") rows.push(`<div class="tip-row"><div class="tip-label">Slots</div><div class="tip-value">${escapeHtml(i.slots)}</div></div>`);
+
+
+      const pillsHtml = props.length
+  ? `
+    <div class="pills">
+      ${props.map(p => {
+        const idx = p.indexOf(":");
+
+        // Case 1: keyword:value → bold keyword
+        if (idx !== -1) {
+          const key = p.slice(0, idx).trim();
+          const value = p.slice(idx + 1).trim();
+
+          return `
+            <span class="pill">
+              <span class="pill-key">${escapeHtml(key)}</span>
+              <span class="pill-value">${escapeHtml(value)}</span>
+            </span>
+          `;
+        }
+
+        // Case 2: plain property → normal text (NO bold)
+        return `
+          <span class="pill">
+            <span class="pill-value">${escapeHtml(p)}</span>
+          </span>
+        `;
+      }).join("")}
+    </div>
+  `
+  : "";
+
+      return `
+        <li>
+          <span class="tooltip ${colorClass}">
+            <b>${escapeHtml(i.name)}</b>
+            <div class="tip">
+              <div class="tip-title">${escapeHtml(i.name)}</div>
+              ${rows.join("")}
+              ${props.length ? `<div class="tip-separator"></div>` : ""}
+              ${pillsHtml}
+            </div>
+          </span>
+          — ${escapeHtml(i.cost_str)}
+        </li>
+      `;
+    }).join("") + `</ul>`;
+  }
+
+   function makeShareURL(data) {
+  const params = new URLSearchParams({
+    size: data.size,
+    cost: data.cost_policy,
+    seed: data.seed
+  });
+
+  return `${location.origin}/?${params.toString()}`;
+}
+
+function updateURL(data) {
+  const params = new URLSearchParams({
+    size: data.size,
+    cost: data.cost_policy,
+    seed: data.seed
+  });
+  history.replaceState(null, "", "?" + params.toString());
+}
+
+  async function generate() {
+  const size = $("size").value;
+  const cost = $("cost").value;
+
+  $("shop").innerHTML = `<div class="card">Loading shop...</div>`;
+
+  try {
+
+    const seed = document.getElementById("seed")?.value?.trim() || "";
+    const url = `/api/shop?size=${encodeURIComponent(size)}&cost=${encodeURIComponent(cost)}&seed=${encodeURIComponent(seed)}`;
+    const res = await fetch(url);
+    // const res = await fetch(`/api/shop?size=${encodeURIComponent(size)}&cost=${encodeURIComponent(cost)}`);
+
+    // Read as text first so we can display server errors even if they're not JSON
+    const text = await res.text();
+
+    let data = null;
+    try { data = JSON.parse(text); } catch {}
+
+    const seedEl = document.getElementById("seed");
+    if (seedEl) seedEl.value = data.seed || seedEl.value;
+
+    if (!res.ok) {
+      $("shop").innerHTML = `
+        <div class="card">
+          <b style="color:#b00;">API error (${res.status})</b>
+          <pre style="white-space:pre-wrap; margin:10px 0 0;">${escapeHtml(text)}</pre>
+        </div>
+      `;
+      return;
+    }
+
+    if (!data) {
+      $("shop").innerHTML = `
+        <div class="card">
+          <b style="color:#b00;">Render error:</b> API did not return JSON.
+          <pre style="white-space:pre-wrap; margin:10px 0 0;">${escapeHtml(text)}</pre>
+        </div>
+      `;
+      return;
+    }
+
+    // Safe reads so missing fields won't crash render
+    const keeperName = data.shopkeeper?.name ?? "(missing shopkeeper name)";
+    const keeperAnc  = data.shopkeeper?.ancestry ?? "(missing ancestry)";
+    const totalStr   = data.total_stock?.str ?? "(missing total)";
+
+    $("shop").innerHTML = `
+      <div class="card" style="margin-bottom:20px;">
+  
+  <span class="shopkeeper-line">
+    <b>Shopkeeper:</b> ${escapeHtml(keeperName)}
+    <span class="muted">(${escapeHtml(keeperAnc)})</span>
+  </span>
+</div>
+
+      <div class="grid">
+        <div class="card"><h3>Gear</h3>${renderList(data.gear)}</div>
+        <div class="card"><h3>Weapons</h3>${renderList(data.weapons)}</div>
+        <div class="card"><h3>Armors</h3>${renderList(data.armors)}</div>
+        <div class="card"><h3>Poisons</h3>${renderList(data.poisons)}</div>
+        <div class="card"><h3>Potions</h3>${renderList(data.potions)}</div>
+      </div>
+    `;
+
+
+    // Generate QR
+    const shareURL = makeShareURL(data);
+    const qrImg = document.getElementById("qr");
+qrImg.src =
+  "https://api.qrserver.com/v1/create-qr-code/?" +
+  "size=160x160&data=" + encodeURIComponent(shareURL);
+
+
+  } catch (err) {
+    $("shop").innerHTML = `
+      <div class="card">
+        <b style="color:#b00;">Network/JS error:</b>
+        <pre style="white-space:pre-wrap; margin:10px 0 0;">${escapeHtml(err?.stack || err?.message || String(err))}</pre>
+      </div>
+    `;
+  }
+  updateURL(data);
+
+}
+
+  const seedInput = document.getElementById("seed");
+const clearSeedBtn = document.getElementById("clear-seed");
+
+clearSeedBtn.addEventListener("click", () => {
+  seedInput.value = "";
+  seedInput.focus();
+});
+
+  $("gen").addEventListener("click", generate);
+  function readParamsAndGenerate() 
+  {
+  const params = new URLSearchParams(location.search);
+
+  // Apply URL params to controls FIRST
+  if (params.has("size")) {
+    const v = params.get("size");
+    if ($("size").querySelector(`option[value="${v}"]`)) {
+      $("size").value = v;
+    }
+  }
+
+  if (params.has("cost")) {
+    const v = params.get("cost");
+    if ($("cost").querySelector(`option[value="${v}"]`)) {
+      $("cost").value = v;
+    }
+  }
+
+  if (params.has("seed")) {
+    $("seed").value = params.get("seed");
+  }
+
+  generate();
+}
+
+readParamsAndGenerate();
+
+// --- Tooltip portal (prevents clipping inside scroll/overflow containers) ---
+let portal = document.getElementById("tooltip-portal");
+if (!portal) {
+  portal = document.createElement("div");
+  portal.id = "tooltip-portal";
+  document.body.appendChild(portal);
+}
+
+function showPortalTooltip(anchorEl) {
+  const tip = anchorEl.querySelector(".tip");
+  if (!tip) return;
+
+  portal.innerHTML = tip.outerHTML;           // copy tooltip HTML (incl. pills)
+  portal.classList.add("show");
+
+  // Position near anchor
+  const r = anchorEl.getBoundingClientRect();
+  const pad = 10;
+
+  // Default: above the anchor
+  let x = r.left;
+  let y = r.top - pad;
+
+  // We need size after content is in DOM
+  const tipEl = portal.firstElementChild;
+  tipEl.style.position = "relative";
+
+  // Temporarily show to measure
+  portal.style.left = "0px";
+  portal.style.top = "0px";
+
+  const w = tipEl.offsetWidth;
+  const h = tipEl.offsetHeight;
+
+  // Clamp horizontally
+  x = Math.min(x, window.innerWidth - w - pad);
+  x = Math.max(pad, x);
+
+  // Prefer above; if not enough space, place below
+  if (r.top - h - pad < 0) {
+    y = r.bottom + pad;
+    // flip arrow to top
+    tipEl.style.position = "relative";
+    // move arrow to top
+    tipEl.style.setProperty("--arrow-top", "1");
+    tipEl.style.setProperty("--arrow-flip", "1");
+    // quick arrow flip by overriding ::after via inline style is hard,
+    // but leaving arrow pointing down is acceptable; remove arrow if you prefer.
+  } else {
+    y = r.top - h - pad;
+  }
+
+  portal.style.left = `${x}px`;
+  portal.style.top = `${y}px`;
+}
+
+function hidePortalTooltip() {
+  portal.classList.remove("show");
+  portal.innerHTML = "";
+}
+
+// Delegate events
+document.addEventListener("mousemove", (e) => {
+  const t = e.target.closest(".tooltip");
+  if (t) showPortalTooltip(t);
+  else hidePortalTooltip();
+});
+
+// Hide on scroll/resize to avoid stale position
+window.addEventListener("scroll", hidePortalTooltip, true);
+window.addEventListener("resize", hidePortalTooltip);
+
+</script>
+
+</body>
+
+<footer class="disclaimer">
+  <em>
+    The Shifting Sigil is an independent product published under the Shadowdark RPG Third-Party License
+    and is not affiliated with The Arcane Library, LLC.
+    Shadowdark RPG © 2023 The Arcane Library, LLC.
+  </em>
+</footer>
+</html>
+

@@ -1,0 +1,31 @@
+Bastard sword    2    10gp    M    C    1d8/1d10    Versatile: You can use this weapon with one or two hands. Use the higher damage die if you're wielding it with two.
+Club    1    5cp    M    C    1d4    -
+Crossbow    1    8gp    R    F    1d6    Two-handed: You must use this weapon with two hands., Load: You must forgo moving to reload this weapon.
+Dagger    1    1gp    M/R    C/N    1d4    Finesse: You may use your STR or DEX when attacking with this weapon., Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Greataxe    2    10gp    M    C    1d8/1d10    Versatile: You can use this weapon with one or two hands. Use the higher damage die if you're wielding it with two.
+Greatsword    2    12gp    M    C    1d12    Two-handed: You must use this weapon with two hands.
+Javelin    1    5sp    M/R    C/F    1d4    Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Longbow    1    8gp    R    F    1d8    Two-handed: You must use this weapon with two hands.
+Longsword    1    9gp    M    C    1d8    -
+Mace    1    5gp    M    C    1d6    -
+Shortbow    1    6gp    R    F    1d4    Two-handed: You must use this weapon with two hands.
+Shortsword    1    7gp    M    C    1d6    -
+Spear    1    5sp    M/R    C/N    1d6    Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Staff    1    5sp    M    C    1d4    Two-handed: You must use this weapon with two hands.
+Warhammer    1    10gp    M    C    1d10    Two-handed: You must use this weapon with two hands.
+Blowgun    1    5gp    R    N    1    Firing this weapon from hiding doesn't reveal your position.
+Bolas    1    2gp    R    N    -    When you hit a legged creature the size of a horse or smaller the target's speed is reduced to close until it frees itself (DC 15 STR or DEX check).
+Morningstar    1    5gp    M    C    1d6/1d8    Versatile: You can use this weapon with one or two hands. Use the higher damage die if you're wielding it with two.
+Pike    2    10gp    M    2x C    1d10    Two-handed: You must use this weapon with two hands.
+Razor chain    1    12gp    M/R    C/N    1d6    Finesse: You may use your STR or DEX when attacking with this weapon., Lash: When you make a ranged attack with this weapon it does not leave your grasp.
+Scimitar    1    8gp    M    C    1d6    Finesse: You may use your STR or DEX when attacking with this weapon.
+Shuriken    1    1gp    R    N    1d4    Can be thrown into the ground. Living creatures who step on it take 1 damage and can only move at half speed for 10 rounds.
+Sling    1    5sp    R    F    1d4    -
+Whip    1    10gp    M/R    C/N    1d4    Finesse: You may use your STR or DEX when attacking with this weapon., Lash: When you make a ranged attack with this weapon it does not leave your grasp.
+Handaxe    1    2gp    M/R    C/N    1d6    Finesse: You may use your STR or DEX when attacking with this weapon., Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Stave    1    2gp    M    C    1d6    Two-handed: You must use this weapon with two hands., Sundering: When you are hit with a melee attack you may choose to destroy this weapon or armor to negate all damage from the attack.
+Boomerang    1    3gp    R    N    1d4    Returning: On a missed ranged attack this weapon returns to the thrower., Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Obsidian club    1    5gp    M    C    1d6    Breakable: This weapon breaks on a natural 1 attack roll.
+Obsidian dagger    1    3gp    M/R    C/N    1d8    Breakable: This weapon breaks on a natural 1 attack roll., Finesse: You may use your STR or DEX when attacking with this weapon., Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Obsidian spear    1    4gp    M/R    C/N    1d8    Breakable: This weapon breaks on a natural 1 attack roll., Thrown: You may throw this weapon to make a ranged attack with it using STR or DEX.
+Sprear-thrower    1    2gp    -    -    -     When used to throw a spear increase the spear's range to far.

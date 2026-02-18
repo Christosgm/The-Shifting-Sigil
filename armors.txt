@@ -1,0 +1,7 @@
+Leather armor    1    10gp    11+DEX    -
+Chainmail    2    60gp    13+DEX    Disadvantage on stealth and swim.
+Plate mail    3    130gp    15    No swim, Disadvantage on stealth.
+Shield    1    10gp    +2    Occupies one hand.
+Mithral chainmail    1    240gp    13+DEX    -
+Mithral plate mail    2    520gp    15    -
+Round shield    1    15gp    +2    Occupies one hand, Sundering: When you are hit with a melee attack you may choose to destroy this weapon or armor to negate all damage from the attack.
